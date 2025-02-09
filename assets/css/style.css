@@ -66,6 +66,7 @@ pre {
   padding: 16px;
   overflow: auto;
   margin-bottom: 16px;
+  background-color: #1e242c; /* Slightly darker pre background for contrast */
 }
 
 /* Tables */
@@ -80,13 +81,15 @@ th, td {
   border: 1px solid #30363d; /* Darker table border */
   text-align: left;
   background-color: #161b22; /* Slightly darker cell background */
+  color: #c9d1d9; /* Lighter text in cells for contrast */
 }
 
 th {
   background-color: #21262d; /* Even darker header background */
   font-weight: 600;
-  color: #f0f6fc; /* Lighter header text */
+  color: #f0f6fc; /* Lighter header text - keep it bright */
 }
+
 
 /* Horizontal lines */
 hr {
