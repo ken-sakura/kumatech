@@ -66,8 +66,7 @@ pre {
   padding: 16px;
   overflow: auto;
   margin-bottom: 16px;
-  background-color: #1e242c; /* Slightly darker pre background for contrast */
-}
+  }
 
 /* Tables */
 table {
@@ -85,7 +84,6 @@ th, td {
 }
 
 th {
-  background-color: #21262d; /* Even darker header background */
   font-weight: 600;
   color: #f0f6fc; /* Lighter header text - keep it bright */
 }
