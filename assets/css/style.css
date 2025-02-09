@@ -60,6 +60,7 @@ table {
 th,
 td {
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid #ffffff;
   text-align: left;
+  padding: 8px;
 }
