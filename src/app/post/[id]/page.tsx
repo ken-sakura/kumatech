@@ -1,5 +1,3 @@
-"use client";
-
 import React from 'react';
 import Link from 'next/link';
 import {Button} from "@/components/ui/button";
@@ -7,6 +5,16 @@ import {cn} from "@/lib/utils";
 import blogPosts from '@/data/blog-posts.json';
 
 interface PostProps {
+  post: {
+    id: number;
+    title: string;
+    theme: string;
+    excerpt: string;
+    imageUrl: string;
+  };
+}
+
+interface PageProps {
   params: {
     id: string;
   };
@@ -18,11 +26,11 @@ export async function generateStaticParams() {
   }));
 }
 
-const Post: React.FC<PostProps> = ({params}) => {
-  const {id} = params;
+async function getPost(id: string) {
+  return blogPosts.find((post) => post.id === parseInt(id));
+}
 
-  const post = blogPosts.find((post) => post.id === parseInt(id));
-
+const Post: React.FC<PostProps> = async ({post}) => {
   if (!post) {
     return <div>Post not found</div>;
   }
@@ -65,16 +73,24 @@ const Post: React.FC<PostProps> = ({params}) => {
 // Basic Markdown to HTML conversion - replace with a proper library for production
 function convertMarkdownToHTML(markdown: string): string {
   const html = markdown
-    .replace(/### (.*)/g, '<h3>$1</h3>')
-    .replace(/## (.*)/g, '<h2>$1</h2>')
-    .replace(/# (.*)/g, '<h1>$1</h1>')
-    .replace(/\*\*(.*)\*\*/g, '<b>$1</b>')
-    .replace(/\*(.*)\*/g, '<i>$1</i>')
-    .replace(/`(.*)`/g, '<code>$1</code>')
-    .replace(/`{3}([\s\S]*?)`{3}/g, '<pre><code>$1</code></pre>')
-    .replace(/\n/g, '<br />');
+    .replace(/### (.*)/g, '<h3>$1<\/h3>')
+    .replace(/## (.*)/g, '<h2>$1<\/h2>')
+    .replace(/# (.*)/g, '<h1>$1<\/h1>')
+    .replace(/\*\*(.*)\*\*/g, '<b>$1<\/b>')
+    .replace(/\*(.*)\*/g, '<i>$1<\/i>')
+    .replace(/`(.*)`/g, '<code>$1<\/code>')
+    .replace(/`{3}([\s\S]*?)`{3}/g, '<pre><code>$1<\/code><\/pre>')
+    .replace(/\n/g, '<br \/>');
   return html;
 }
 
-export default Post;
+const Page: React.FC<PageProps> = async ({params}) => {
+  const {id} = params;
+  const post = await getPost(id);
+  if (!post) {
+    return <div>Post not found</div>;
+  }
+  return <Post post={post} />;
+}
 
+export default Page;
