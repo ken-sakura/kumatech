@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
 import {Button} from "@/components/ui/button";
-import {cn} from "@/lib/utils";
 import blogPosts from '@/data/blog-posts.json';
 import fs from 'fs/promises';
 import path from 'path';
@@ -13,6 +12,7 @@ interface PostProps {
     theme: string;
     excerpt: string;
     imageUrl: string;
+    contentPath: string;
   };
 }
 
@@ -32,9 +32,9 @@ async function getPost(id: string) {
   return blogPosts.find((post) => post.id === parseInt(id));
 }
 
-async function getPostContent(id: string): Promise<string> {
+async function getPostContent(contentPath: string): Promise<string> {
   try {
-    const filePath = path.join(process.cwd(), 'public', 'posts', `${id}.html`);
+    const filePath = path.join(process.cwd(), 'public', contentPath);
     const fileContent = await fs.readFile(filePath, 'utf8');
     return fileContent;
   } catch (error) {
@@ -48,7 +48,7 @@ const Post: React.FC<PostProps> = async ({post}) => {
     return <div>Post not found</div>;
   }
 
-  const postContent = await getPostContent(post.id.toString());
+  const postContent = await getPostContent(post.contentPath);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
