@@ -1,6 +1,4 @@
-"use client";
-
-import React, {useState} from 'react';
+import React from 'react';
 import {Header} from '@/components/Header';
 import {BlogPostCard} from '@/components/BlogPostCard';
 import Link from 'next/link';
@@ -11,7 +9,7 @@ const categories = ['All', 'React', 'TypeScript', 'Next.js', 'JavaScript'];
 const MAX_POSTS = 24;
 
 export default function Home() {
-  const [selectedCategory, setSelectedCategory] = useState('All');
+  const selectedCategory = 'All';
 
   const filteredPosts = selectedCategory === 'All'
     ? blogPosts

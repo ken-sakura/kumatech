@@ -1,5 +1,3 @@
-"use client";
-
 import React from 'react';
 import {Header} from '@/components/Header';
 import {BlogPostCard} from '@/components/BlogPostCard';
@@ -38,3 +36,4 @@ const CategoryPage: React.FC<CategoryPageProps> = ({params}) => {
 };
 
 export default CategoryPage;
+
