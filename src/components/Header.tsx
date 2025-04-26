@@ -23,14 +23,10 @@ export const Header = () => {
                 About
               </Link>
             </li>
-            <li>
-              <Link href="/contact" className="hover:text-accent">
-                Contact
-              </Link>
-            </li>
           </ul>
         </nav>
       </div>
     </header>
   );
 };
+
