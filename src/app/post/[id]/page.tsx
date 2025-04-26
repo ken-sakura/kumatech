@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import {Button} from "@/components/ui/button";
 import {cn} from "@/lib/utils";
+import blogPosts from '@/data/blog-posts.json';
 
 interface PostProps {
   params: {
@@ -11,69 +12,30 @@ interface PostProps {
   };
 }
 
+export async function generateStaticParams() {
+  return blogPosts.map((post) => ({
+    id: post.id.toString(),
+  }));
+}
+
 const Post: React.FC<PostProps> = ({params}) => {
   const {id} = params;
 
+  const post = blogPosts.find((post) => post.id === parseInt(id));
+
+  if (!post) {
+    return <div>Post not found</div>;
+  }
+
   // Dummy content - replace with actual data fetching
   const postContent = `
-  # React Hooks: A Deep Dive
+  # ${post.title}
 
-  React Hooks have revolutionized how we write React components, 
-  allowing us to use state and other React features in functional components. 
-  This guide provides an in-depth look at some of the most commonly used hooks.
+  ${post.excerpt}
 
-  ## useState
+  ## Theme
 
-  The useState hook allows you to add state to your functional components. 
-  Here's a basic example:
-
-  \`\`\`javascript
-  import React, { useState } from 'react';
-
-  function Example() {
-    const [count, setCount] = useState(0);
-
-    return (
-      <div>
-        <p>You clicked {count} times</p>
-        <button onClick={() => setCount(count + 1)}>
-          Click me
-        </button>
-      </div>
-    );
-  }
-  \`\`\`
-
-  ## useEffect
-
-  The useEffect hook lets you perform side effects in functional components:
-
-  \`\`\`javascript
-  import React, { useState, useEffect } from 'react';
-
-  function Example() {
-    const [data, setData] = useState(null);
-
-    useEffect(() => {
-      async function fetchData() {
-        const response = await fetch('https://api.example.com/data');
-        const result = await response.json();
-        setData(result);
-      }
-      fetchData();
-    }, []); // The empty array ensures this effect runs only once
-
-    return (
-      <div>
-        {data ? <p>Data: {JSON.stringify(data)}</p> : <p>Loading...</p>}
-      </div>
-    );
-  }
-  \`\`\`
-
-  ## Conclusion
-
-  React Hooks provide a powerful and elegant way to manage state and side effects in your functional components. Experiment and explore to unlock their full potential!
+  ${post.theme}
   `;
 
   return (
@@ -115,3 +77,4 @@ function convertMarkdownToHTML(markdown: string): string {
 }
 
 export default Post;
+
