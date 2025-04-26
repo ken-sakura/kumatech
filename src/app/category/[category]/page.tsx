@@ -3,43 +3,13 @@
 import React from 'react';
 import {Header} from '@/components/Header';
 import {BlogPostCard} from '@/components/BlogPostCard';
+import blogPosts from '@/data/blog-posts.json';
 
 interface CategoryPageProps {
   params: {
     category: string;
   };
 }
-
-const blogPosts = [
-  {
-    id: 1,
-    title: 'Introduction to React Hooks',
-    theme: 'React',
-    excerpt: 'Learn how to use React hooks to manage state and side effects in your functional components.',
-    imageUrl: 'https://picsum.photos/id/237/400/300',
-  },
-  {
-    id: 2,
-    title: 'Mastering TypeScript',
-    theme: 'TypeScript',
-    excerpt: 'Explore the advanced features of TypeScript and improve your code quality.',
-    imageUrl: 'https://picsum.photos/id/238/400/300',
-  },
-  {
-    id: 3,
-    title: 'Getting Started with Next.js',
-    theme: 'Next.js',
-    excerpt: 'A beginner-friendly guide to building server-rendered React apps with Next.js.',
-    imageUrl: 'https://picsum.photos/id/239/400/300',
-  },
-  {
-    id: 4,
-    title: 'Advanced JavaScript Concepts',
-    theme: 'JavaScript',
-    excerpt: 'Delve into the intricacies of JavaScript, including closures, prototypes, and asynchronous programming.',
-    imageUrl: 'https://picsum.photos/id/240/400/300',
-  },
-];
 
 const CategoryPage: React.FC<CategoryPageProps> = ({params}) => {
   const {category} = params;
