@@ -3,6 +3,8 @@ import Link from 'next/link';
 import {Button} from "@/components/ui/button";
 import {cn} from "@/lib/utils";
 import blogPosts from '@/data/blog-posts.json';
+import fs from 'fs/promises';
+import path from 'path';
 
 interface PostProps {
   post: {
@@ -30,21 +32,23 @@ async function getPost(id: string) {
   return blogPosts.find((post) => post.id === parseInt(id));
 }
 
+async function getPostContent(id: string): Promise<string> {
+  try {
+    const filePath = path.join(process.cwd(), 'public', 'posts', `${id}.html`);
+    const fileContent = await fs.readFile(filePath, 'utf8');
+    return fileContent;
+  } catch (error) {
+    console.error("Failed to read HTML file:", error);
+    return '<p>Error loading post content.</p>';
+  }
+}
+
 const Post: React.FC<PostProps> = async ({post}) => {
   if (!post) {
     return <div>Post not found</div>;
   }
 
-  // Dummy content - replace with actual data fetching
-  const postContent = `
-  # ${post.title}
-
-  ${post.excerpt}
-
-  ## Theme
-
-  ${post.theme}
-  `;
+  const postContent = await getPostContent(post.id.toString());
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -57,10 +61,8 @@ const Post: React.FC<PostProps> = async ({post}) => {
       </header>
       <main className="container mx-auto px-4 py-8">
         <section className="mb-8">
-          <h1 className="text-4xl font-bold mb-4">Blueprint Detail</h1>
-          <div className="bg-card rounded-md shadow-md p-6 markdown-body">
-            <div dangerouslySetInnerHTML={{__html: convertMarkdownToHTML(postContent)}} />
-          </div>
+          <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
+          <div className="bg-card rounded-md shadow-md p-6 markdown-body" dangerouslySetInnerHTML={{__html: postContent}} />
         </section>
         <Link href="/">
           <Button variant="outline">Back to Home</Button>
@@ -69,20 +71,6 @@ const Post: React.FC<PostProps> = async ({post}) => {
     </div>
   );
 };
-
-// Basic Markdown to HTML conversion - replace with a proper library for production
-function convertMarkdownToHTML(markdown: string): string {
-  const html = markdown
-    .replace(/### (.*)/g, '<h3>$1<\/h3>')
-    .replace(/## (.*)/g, '<h2>$1<\/h2>')
-    .replace(/# (.*)/g, '<h1>$1<\/h1>')
-    .replace(/\*\*(.*)\*\*/g, '<b>$1<\/b>')
-    .replace(/\*(.*)\*/g, '<i>$1<\/i>')
-    .replace(/`(.*)`/g, '<code>$1<\/code>')
-    .replace(/`{3}([\s\S]*?)`{3}/g, '<pre><code>$1<\/code><\/pre>')
-    .replace(/\n/g, '<br \/>');
-  return html;
-}
 
 const Page: React.FC<PageProps> = async ({params}) => {
   const {id} = params;
