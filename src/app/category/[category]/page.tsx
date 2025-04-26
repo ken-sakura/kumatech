@@ -1,9 +1,14 @@
 "use client";
 
-import React, {useState} from 'react';
+import React from 'react';
 import {Header} from '@/components/Header';
 import {BlogPostCard} from '@/components/BlogPostCard';
-import Link from 'next/link';
+
+interface CategoryPageProps {
+  params: {
+    category: string;
+  };
+}
 
 const blogPosts = [
   {
@@ -36,35 +41,21 @@ const blogPosts = [
   },
 ];
 
-const categories = ['All', 'React', 'TypeScript', 'Next.js', 'JavaScript'];
+const CategoryPage: React.FC<CategoryPageProps> = ({params}) => {
+  const {category} = params;
 
-export default function Home() {
-  const [selectedCategory, setSelectedCategory] = useState('All');
-
-  const filteredPosts = selectedCategory === 'All'
+  const filteredPosts = category === 'All'
     ? blogPosts
-    : blogPosts.filter((post) => post.theme === selectedCategory);
+    : blogPosts.filter((post) => post.theme.toLowerCase() === category.toLowerCase());
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Header />
       <main className="container mx-auto px-4 py-8">
-        <section className="mb-8">
-          <h2 className="text-3xl font-semibold mb-4">Categories</h2>
-          <div className="flex space-x-4">
-            {categories.map((category) => (
-              <Link key={category} href={`/category/${category}`}>
-                <button
-                  className="px-4 py-2 rounded-full bg-secondary text-secondary-foreground hover:bg-accent hover:text-accent-foreground"
-                >
-                  {category}
-                </button>
-              </Link>
-            ))}
-          </div>
-        </section>
         <section>
-          <h2 className="text-3xl font-semibold mb-4">Latest Blueprints</h2>
+          <h2 className="text-3xl font-semibold mb-4">
+            Category: {category}
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredPosts.map((post) => (
               <BlogPostCard key={post.id} post={post} />
@@ -74,4 +65,6 @@ export default function Home() {
       </main>
     </div>
   );
-}
+};
+
+export default CategoryPage;
