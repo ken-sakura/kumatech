@@ -51,23 +51,23 @@ const Post: React.FC<PostProps> = async ({post}) => {
   const postContent = await getPostContent(post.contentPath);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <header className="bg-secondary text-secondary-foreground py-4">
-        <div className="container mx-auto px-4 flex items-center justify-between">
-          <Link href="/" className="text-2xl font-bold">
-            Tech Blueprints
-          </Link>
-        </div>
-      </header>
-      <main className="container mx-auto px-4 py-8">
-        <section className="mb-8">
-          <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
-          <div className="bg-card rounded-md shadow-md p-6 markdown-body" dangerouslySetInnerHTML={{__html: postContent}} />
-        </section>
-        <Link href="/">
-          <Button variant="outline">Back to Home</Button>
-        </Link>
-      </main>
+    <div className="min-h-screen bg-background text-foreground markdown-body">
+        <header className="bg-secondary text-secondary-foreground py-4">
+            <div className="container mx-auto px-4 flex items-center justify-between">
+                <Link href="/" className="text-2xl font-bold">
+                    Tech Blueprints
+                </Link>
+            </div>
+        </header>
+        <main className="container mx-auto px-4 py-8">
+            <section className="mb-8">
+                <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
+                <div dangerouslySetInnerHTML={{__html: postContent}} />
+            </section>
+            <Link href="/">
+                <Button variant="outline">Back to Home</Button>
+            </Link>
+        </main>
     </div>
   );
 };
