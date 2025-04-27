@@ -194,5 +194,13 @@
     "theme": "JavaScript",
     "excerpt": "Delve into the intricacies of JavaScript, including closures, prototypes, and asynchronous programming.",
     "imageUrl": "https://picsum.photos/id/240/400/300"
+  },
+  {
+    "id": 29,
+    "title": "New Article",
+    "theme": "New Theme",
+    "excerpt": "New Article Excerpt",
+    "imageUrl": "https://picsum.photos/id/241/400/300",
+    "contentPath": "/blog/new-article.html"
   }
 ]
