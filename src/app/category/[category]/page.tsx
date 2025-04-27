@@ -10,7 +10,7 @@ interface CategoryPageProps {
 }
 
 export async function generateStaticParams() {
-  return [{category: 'All'}, {category: 'React'}, {category: 'TypeScript'}, {category: 'Next.js'}, {category: 'JavaScript'}];
+  return [{category: 'All'}, {category: 'vim'}, {category: 'Wezterm'}, {category: 'Next.js'}, {category: 'Java/typeScript'}], {category: 'GAS'}];
 }
 
 const CategoryPage: React.FC<CategoryPageProps> = ({params}) => {

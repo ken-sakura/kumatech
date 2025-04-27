@@ -4,7 +4,7 @@ import {BlogPostCard} from '@/components/BlogPostCard';
 import Link from 'next/link';
 import blogPosts from '@/data/blog-posts.json';
 
-const categories = ['All', 'React', 'TypeScript', 'Next.js', 'JavaScript'];
+const categories = ['All', 'vim', 'Wezterm', 'Next.js', 'Java/TypeScript','GAS'];
 
 const MAX_POSTS = 24;
 
