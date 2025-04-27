@@ -1,0 +1,206 @@
+[
+  {
+    "id": 1,
+    "title": "Introduction to React Hooks",
+    "theme": "React",
+    "excerpt": "Learn how to use React hooks to manage state and side effects in your functional components.",
+    "imageUrl": "https://picsum.photos/id/237/400/300"
+  },
+  {
+    "id": 2,
+    "title": "Mastering TypeScript",
+    "theme": "TypeScript",
+    "excerpt": "Explore the advanced features of TypeScript and improve your code quality.",
+    "imageUrl": "https://picsum.photos/id/238/400/300"
+  },
+  {
+    "id": 3,
+    "title": "Getting Started with Next.js",
+    "theme": "Next.js",
+    "excerpt": "A beginner-friendly guide to building server-rendered React apps with Next.js.",
+    "imageUrl": "https://picsum.photos/id/239/400/300"
+  },
+  {
+    "id": 4,
+    "title": "Advanced JavaScript Concepts",
+    "theme": "JavaScript",
+    "excerpt": "Delve into the intricacies of JavaScript, including closures, prototypes, and asynchronous programming.",
+    "imageUrl": "https://picsum.photos/id/240/400/300"
+  },
+  {
+    "id": 5,
+    "title": "Introduction to React Hooks",
+    "theme": "React",
+    "excerpt": "Learn how to use React hooks to manage state and side effects in your functional components.",
+    "imageUrl": "https://picsum.photos/id/237/400/300"
+  },
+  {
+    "id": 6,
+    "title": "Mastering TypeScript",
+    "theme": "TypeScript",
+    "excerpt": "Explore the advanced features of TypeScript and improve your code quality.",
+    "imageUrl": "https://picsum.photos/id/238/400/300"
+  },
+  {
+    "id": 7,
+    "title": "Getting Started with Next.js",
+    "theme": "Next.js",
+    "excerpt": "A beginner-friendly guide to building server-rendered React apps with Next.js.",
+    "imageUrl": "https://picsum.photos/id/239/400/300"
+  },
+  {
+    "id": 8,
+    "title": "Advanced JavaScript Concepts",
+    "theme": "JavaScript",
+    "excerpt": "Delve into the intricacies of JavaScript, including closures, prototypes, and asynchronous programming.",
+    "imageUrl": "https://picsum.photos/id/240/400/300"
+  },
+  {
+    "id": 9,
+    "title": "Introduction to React Hooks",
+    "theme": "React",
+    "excerpt": "Learn how to use React hooks to manage state and side effects in your functional components.",
+    "imageUrl": "https://picsum.photos/id/237/400/300"
+  },
+  {
+    "id": 10,
+    "title": "Mastering TypeScript",
+    "theme": "TypeScript",
+    "excerpt": "Explore the advanced features of TypeScript and improve your code quality.",
+    "imageUrl": "https://picsum.photos/id/238/400/300"
+  },
+  {
+    "id": 11,
+    "title": "Getting Started with Next.js",
+    "theme": "Next.js",
+    "excerpt": "A beginner-friendly guide to building server-rendered React apps with Next.js.",
+    "imageUrl": "https://picsum.photos/id/239/400/300"
+  },
+  {
+    "id": 12,
+    "title": "Advanced JavaScript Concepts",
+    "theme": "JavaScript",
+    "excerpt": "Delve into the intricacies of JavaScript, including closures, prototypes, and asynchronous programming.",
+    "imageUrl": "https://picsum.photos/id/240/400/300"
+  },
+  {
+    "id": 13,
+    "title": "Introduction to React Hooks",
+    "theme": "React",
+    "excerpt": "Learn how to use React hooks to manage state and side effects in your functional components.",
+    "imageUrl": "https://picsum.photos/id/237/400/300"
+  },
+  {
+    "id": 14,
+    "title": "Mastering TypeScript",
+    "theme": "TypeScript",
+    "excerpt": "Explore the advanced features of TypeScript and improve your code quality.",
+    "imageUrl": "https://picsum.photos/id/238/400/300"
+  },
+  {
+    "id": 15,
+    "title": "Getting Started with Next.js",
+    "theme": "Next.js",
+    "excerpt": "A beginner-friendly guide to building server-rendered React apps with Next.js.",
+    "imageUrl": "https://picsum.photos/id/239/400/300"
+  },
+  {
+    "id": 16,
+    "title": "Advanced JavaScript Concepts",
+    "theme": "JavaScript",
+    "excerpt": "Delve into the intricacies of JavaScript, including closures, prototypes, and asynchronous programming.",
+    "imageUrl": "https://picsum.photos/id/240/400/300"
+  },
+  {
+    "id": 17,
+    "title": "Introduction to React Hooks",
+    "theme": "React",
+    "excerpt": "Learn how to use React hooks to manage state and side effects in your functional components.",
+    "imageUrl": "https://picsum.photos/id/237/400/300"
+  },
+  {
+    "id": 18,
+    "title": "Mastering TypeScript",
+    "theme": "TypeScript",
+    "excerpt": "Explore the advanced features of TypeScript and improve your code quality.",
+    "imageUrl": "https://picsum.photos/id/238/400/300"
+  },
+  {
+    "id": 19,
+    "title": "Getting Started with Next.js",
+    "theme": "Next.js",
+    "excerpt": "A beginner-friendly guide to building server-rendered React apps with Next.js.",
+    "imageUrl": "https://picsum.photos/id/239/400/300"
+  },
+  {
+    "id": 20,
+    "title": "Advanced JavaScript Concepts",
+    "theme": "JavaScript",
+    "excerpt": "Delve into the intricacies of JavaScript, including closures, prototypes, and asynchronous programming.",
+    "imageUrl": "https://picsum.photos/id/240/400/300"
+  },
+  {
+    "id": 21,
+    "title": "Introduction to React Hooks",
+    "theme": "React",
+    "excerpt": "Learn how to use React hooks to manage state and side effects in your functional components.",
+    "imageUrl": "https://picsum.photos/id/237/400/300"
+  },
+  {
+    "id": 22,
+    "title": "Mastering TypeScript",
+    "theme": "TypeScript",
+    "excerpt": "Explore the advanced features of TypeScript and improve your code quality.",
+    "imageUrl": "https://picsum.photos/id/238/400/300"
+  },
+  {
+    "id": 23,
+    "title": "Getting Started with Next.js",
+    "theme": "Next.js",
+    "excerpt": "A beginner-friendly guide to building server-rendered React apps with Next.js.",
+    "imageUrl": "https://picsum.photos/id/239/400/300"
+  },
+  {
+    "id": 24,
+    "title": "Advanced JavaScript Concepts",
+    "theme": "JavaScript",
+    "excerpt": "Delve into the intricacies of JavaScript, including closures, prototypes, and asynchronous programming.",
+    "imageUrl": "https://picsum.photos/id/240/400/300"
+  },
+  {
+    "id": 25,
+    "title": "Introduction to React Hooks",
+    "theme": "React",
+    "excerpt": "Learn how to use React hooks to manage state and side effects in your functional components.",
+    "imageUrl": "https://picsum.photos/id/237/400/300"
+  },
+  {
+    "id": 26,
+    "title": "Mastering TypeScript",
+    "theme": "TypeScript",
+    "excerpt": "Explore the advanced features of TypeScript and improve your code quality.",
+    "imageUrl": "https://picsum.photos/id/238/400/300"
+  },
+  {
+    "id": 27,
+    "title": "Getting Started with Next.js",
+    "theme": "Next.js",
+    "excerpt": "A beginner-friendly guide to building server-rendered React apps with Next.js.",
+    "imageUrl": "https://picsum.photos/id/239/400/300"
+  },
+  {
+    "id": 28,
+    "title": "Advanced JavaScript Concepts",
+    "theme": "JavaScript",
+    "excerpt": "Delve into the intricacies of JavaScript, including closures, prototypes, and asynchronous programming.",
+    "imageUrl": "https://picsum.photos/id/240/400/300"
+  },
+  {
+    "id": 29,
+    "title": "New Article",
+    "theme": "New Theme",
+    "excerpt": "New Article Excerpt",
+    "imageUrl": "https://picsum.photos/id/241/400/300",
+    "contentPath": "/blog/new-article.html"
+  }
+]

@@ -1,7 +1,5 @@
-# kumatech
-くまテックは、くまみたいな私がIT関連のブログを書くために
-リポジトリです。
-完全趣味のブログを目指しているので誰の役に立つかはわかりませんが
-趣味の範囲で勉強したことを書こうと思います。
-IT関連と言ってもかなり浅い内容になるが、私のメモ書きが誰かの役に経てば
-嬉しいかな〜って思います。
+# Firebase Studio
+
+This is a NextJS starter in Firebase Studio.
+
+To get started, take a look at src/app/page.tsx.
