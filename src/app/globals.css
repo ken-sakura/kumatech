@@ -194,13 +194,18 @@ body {
 .markdown-body .pl-vo {
   color: #c9d1d9;
 }
-.markdown-body code,
-.markdown-body tt {
+
+.markdown-body pre {
   background-color: #1e2328;
-  border-radius: 4px;
-  color: #c9d1d9;
-  padding: 0.2em 0.4em;
+  border-radius: 6px;
   border: 1px solid #333;
+  padding: 16px;
+  overflow-x: auto;
+}
+.markdown-body code {
+    background-color: transparent;
+    padding: 0;
+    border: none;
 }
 .markdown-body hr {
   background-color: var(--border);
