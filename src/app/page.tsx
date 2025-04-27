@@ -4,7 +4,7 @@ import {BlogPostCard} from '@/components/BlogPostCard';
 import Link from 'next/link';
 import blogPosts from '@/data/blog-posts.json';
 
-const categories = ['All', 'React', 'TypeScript', 'Next.js', 'JavaScript'];
+const categories = ['All', 'vim'];
 
 const MAX_POSTS = 24;
 
@@ -36,7 +36,7 @@ export default function Home() {
           </div>
         </section>
         <section>
-          <h2 className="text-3xl font-semibold mb-4">Latest Blueprints</h2>
+          <h2 className="text-3xl font-semibold mb-4">Latest Posts</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {displayedPosts.map((post) => (
               <BlogPostCard key={post.id} post={post} />

@@ -9,7 +9,7 @@ export const Header = () => {
     <header className="bg-secondary text-secondary-foreground py-4">
       <div className="container mx-auto px-4 flex items-center justify-between">
         <Link href="/" className="text-2xl font-bold">
-          Tech Blueprints
+          KumaTech
         </Link>
         <nav>
           <ul className="flex space-x-6">
