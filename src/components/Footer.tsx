@@ -11,7 +11,7 @@ export const Footer = () => {
         <Link href="/">
           <Button variant="outline">Home</Button>
         </Link>
-        <p>&copy; {new Date().getFullYear()} Tech Blueprints. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} KumaTech. All rights reserved.</p>
       </div>
     </footer>
   );
