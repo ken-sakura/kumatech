@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Tech Blueprints',
-  description: 'Explore the world of technology with Tech Blueprints.',
+  title: 'kumatech',
+  description: 'kumatech is a place to casually share work notes. Please use the contents of the articles at your own risk..',
 };
 
 export default function RootLayout({

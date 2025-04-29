@@ -1,10 +1,10 @@
 [
-  {
+ {
     "id": 1,
-    "title": "New Article",
-    "theme": "New Theme",
-    "excerpt": "New Article Excerpt",
+    "title": "vimの設定ファイルについて",
+    "theme": "vim",
+    "excerpt": "vim",
     "imageUrl": "https://picsum.photos/id/241/400/300",
-    "contentPath": "/blog/new-article.html"
+    "contentPath": "/blog/vim/setting.html"
   }
 ]
