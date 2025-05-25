@@ -9,7 +9,7 @@ export const Header = () => {
     <header className="bg-secondary text-secondary-foreground py-4">
       <div className="container mx-auto px-4 flex items-center justify-between">
         <Link href="/" className="text-2xl font-bold">
- <img src="/app/logo/logo.png" alt="Logo" width={30} height={30} className="inline-block mr-2" />
+ <img src="../app/logo/logo.png" alt="Logo" width={30} height={30} className="inline-block mr-2" />
           KumaTech
         </Link>
         <nav>
