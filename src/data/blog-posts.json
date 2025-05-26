@@ -4,7 +4,7 @@
     "title": "vimの設定ファイルについて",
     "theme": "vim",
     "excerpt": "vimの設定ファイルについての記事メモですよ。",
-    "imageUrl": "/image/vim.png",
+    "imageUrl": "/kumatech/image/vim.png",
     "contentPath": "/blog/vim/setting.html"
  },
  {
@@ -12,7 +12,7 @@
     "title": "webアプリ作成におけるnpmとnpxの違いについて",
     "theme": "nodejs",
     "excerpt": "npmとnpxについてイマイチよくわからなかったから自分なりにまとめてみた。",
-    "imageUrl": "/image/nodejs.png",
+    "imageUrl": "/kumatech/image/nodejs.png",
     "contentPath": "/blog/nodejs/npm-npx.html"
  },
  {
@@ -20,7 +20,7 @@
     "title": "next js初期設定まとめ",
     "theme": "nextjs",
     "excerpt": "nextjsの初期設定がわからなかったので勉強しました。",
-    "imageUrl": "/image/nextjs.png",
+    "imageUrl": "/kumatech/image/nextjs.png",
     "contentPath": "/blog/nextjs/setting-nextjs.html"
  }
 ]
