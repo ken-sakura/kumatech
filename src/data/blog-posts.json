@@ -3,8 +3,24 @@
     "id": 1,
     "title": "vimの設定ファイルについて",
     "theme": "vim",
-    "excerpt": "vim",
-    "imageUrl": "https://picsum.photos/id/241/400/300",
+    "excerpt": "vimの設定ファイルについての記事メモですよ。",
+    "imageUrl": "/image/vim.png",
     "contentPath": "/blog/vim/setting.html"
-  }
+ },
+ {
+    "id": 2,
+    "title": "webアプリ作成におけるnpmとnpxの違いについて",
+    "theme": "nodejs",
+    "excerpt": "npmとnpxについてイマイチよくわからなかったから自分なりにまとめてみた。",
+    "imageUrl": "/image/nodejs.png",
+    "contentPath": "/blog/nodejs/npm-npx.html"
+ },
+ {
+    "id": 3,
+    "title": "next js初期設定まとめ",
+    "theme": "nextjs",
+    "excerpt": "nextjsの初期設定がわからなかったので勉強しました。",
+    "imageUrl": "/image/nextjs.png",
+    "contentPath": "/blog/nextjs/setting-nextjs.html"
+ }
 ]
