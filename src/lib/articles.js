@@ -1,60 +1,35 @@
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
-import { remark } from 'remark';
-import html from 'remark-html';
-import highlight from 'remark-highlight.js';
+import fs from 'fs'
+import path from 'path'
+import matter from 'gray-matter'
+import { remark } from 'remark'
+import html from 'remark-html'
 
-const articlesDirectory = path.join(process.cwd(), 'articles');
-const navigationPath = path.join(process.cwd(), 'data/navigation.json');
+const articlesDirectory = path.join(process.cwd()) // ルートディレクトリからのパスにする
 
-// Get all navigation data from JSON
-export function getNavigationData() {
-  const fileContents = fs.readFileSync(navigationPath, 'utf8');
-  return JSON.parse(fileContents);
-}
-
-// Get all possible paths for [theme]/[slug]
-export function getAllArticlePaths() {
-  const navigation = getNavigationData();
-  const paths = [];
-  navigation.forEach(theme => {
-    theme.articles.forEach(article => {
-      paths.push({
-        params: {
-          themeId: theme.themeId,
-          slug: article.slug,
-        },
-      });
-    });
-  });
-  return paths;
-}
-
-// Get data for a single article by slug
-export async function getArticleData(slug) {
-  const fullPath = path.join(articlesDirectory, `${slug}.md`);
-  // Handle file not found case
+// ファイルパスを直接受け取って記事データを返す新しい関数
+export async function getArticleDataByPath(filePath) {
+  const fullPath = path.join(articlesDirectory, filePath)
+  
+  // ファイルが存在するかチェック
   if (!fs.existsSync(fullPath)) {
-      return null;
+    console.error(`Error: File not found at ${fullPath}`);
+    return null;
   }
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
 
-  // Use gray-matter to parse the post metadata section
-  const matterResult = matter(fileContents);
+  const fileContents = fs.readFileSync(fullPath, 'utf8')
 
-  // Use remark to convert markdown into HTML string
+  // gray-matterでメタデータをパース
+  const matterResult = matter(fileContents)
+
+  // remarkでMarkdownをHTMLに変換
   const processedContent = await remark()
-    .use(html, { sanitize: false })
-    .use(highlight)
-    .process(matterResult.content);
-  const contentHtml = processedContent.toString();
+    .use(html)
+    .process(matterResult.content)
+  const contentHtml = processedContent.toString()
 
-  // Combine the data with the id and contentHtml
+  // データを結合して返す
   return {
-    slug,
-    contentHtml,
     ...matterResult.data,
-  };
+    contentHtml,
+  }
 }
-
