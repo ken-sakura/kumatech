@@ -4,100 +4,60 @@ import matter from 'gray-matter';
 import { remark } from 'remark';
 import html from 'remark-html';
 
+// 'posts' ディレクトリへのパス
 const postsDirectory = path.join(process.cwd(), 'posts');
 
-export interface PostData {
-  id: string;
-  slug: string[];
-  contentHtml: string;
-  [key: string]: any;
-}
-
-export interface PostEntry {
-    id: string;
-    slug: string[];
-    title: string;
-    category: string;
-}
-
-// カテゴリと記事のリストを取得
-export function getSortedPostsData() {
-  const categories: { [key: string]: PostEntry[] } = {};
-
-  const traverseDirectory = (dir: string, currentPath: string[] = []) => {
-    const fileNames = fs.readdirSync(dir);
-    for (const fileName of fileNames) {
-      const fullPath = path.join(dir, fileName);
-      const stat = fs.statSync(fullPath);
-
-      if (stat.isDirectory()) {
-        traverseDirectory(fullPath, [...currentPath, fileName]);
-      } else if (fileName.endsWith('.md')) {
-        const id = fileName.replace(/\.md$/, '');
-        const slug = [...currentPath, id];
-        const fileContents = fs.readFileSync(fullPath, 'utf8');
-        const matterResult = matter(fileContents);
-        
-        const category = currentPath.length > 0 ? currentPath[0] : 'Uncategorized';
-        if (!categories[category]) {
-          categories[category] = [];
-        }
-
-        categories[category].push({
-          id,
-          slug,
-          title: matterResult.data.title || id,
-          category: category
-        });
-      }
-    }
-  };
-
-  traverseDirectory(postsDirectory);
-  return categories;
-}
-
-// 静的生成のためのパスリストを取得
+// すべての投稿のslug（URLパス）を取得する
 export function getAllPostSlugs() {
-  const slugs: { params: { slug: string[] } }[] = [];
+  const allPostSlugs: { params: { slug: string[] } }[] = [];
+  const dirents = fs.readdirSync(postsDirectory, { withFileTypes: true });
 
-  const traverseDirectory = (dir: string, currentPath: string[] = []) => {
-    const fileNames = fs.readdirSync(dir);
-    for (const fileName of fileNames) {
-      const fullPath = path.join(dir, fileName);
-      const stat = fs.statSync(fullPath);
-
-      if (stat.isDirectory()) {
-        traverseDirectory(fullPath, [...currentPath, fileName]);
-      } else if (fileName.endsWith('.md')) {
-        const id = fileName.replace(/\.md$/, '');
-        slugs.push({
-          params: {
-            slug: [...currentPath, id],
-          },
-        });
+  // postsディレクトリ内のファイルやディレクトリを再帰的に探索
+  function getSlugs(directoryPath: string, parentSlugs: string[] = []) {
+    const dirents = fs.readdirSync(directoryPath, { withFileTypes: true });
+    for (const dirent of dirents) {
+      const fullPath = path.join(directoryPath, dirent.name);
+      if (dirent.isDirectory()) {
+        getSlugs(fullPath, [...parentSlugs, dirent.name]);
+      } else if (dirent.isFile() && dirent.name.endsWith('.md')) {
+        const slug = [...parentSlugs, dirent.name.replace(/\.md$/, '')];
+        allPostSlugs.push({ params: { slug } });
       }
     }
-  };
+  }
 
-  traverseDirectory(postsDirectory);
-  return slugs;
+  getSlugs(postsDirectory);
+  return allPostSlugs;
 }
 
-// slugに基づいて記事データを取得
-export async function getPostData(slug: string[]): Promise<PostData> {
+// slugに基づいて投稿データを取得する
+export async function getPostData(slug: string[]) {
+  // --- ▼ 修正点 ▼ ---
+  // slug配列から正しいファイルパスを生成します。
+  // 修正前は不正なパスを生成していました。
+  // 例: slugが ['getting-started', 'introduction'] の場合、
+  // 正しいパスは 'posts/getting-started/introduction.md' となります。
   const fullPath = path.join(postsDirectory, ...slug) + '.md';
+  // --- ▲ 修正点 ▲ ---
+
+  // ファイルが存在しない場合はエラーを投げる
+  if (!fs.existsSync(fullPath)) {
+    throw new Error(`Post not found for slug: ${slug.join('/')}`);
+  }
+
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 
+  // gray-matterを使ってメタデータをパース
   const matterResult = matter(fileContents);
 
+  // remarkを使ってMarkdownをHTMLに変換
   const processedContent = await remark()
     .use(html)
     .process(matterResult.content);
   const contentHtml = processedContent.toString();
 
+  // データをslugとHTMLコンテンツと結合して返す
   return {
-    id: slug[slug.length - 1],
     slug,
     contentHtml,
     ...matterResult.data,
