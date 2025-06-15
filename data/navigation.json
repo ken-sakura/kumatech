@@ -1,0 +1,35 @@
+[
+  {
+    "theme": "Next.js入門",
+    "themeId": "nextjs-basics",
+    "articles": [
+      {
+        "title": "プロジェクトのセットアップ",
+        "slug": "project-setup",
+        "description": "Next.jsプロジェクトの初期設定と起動方法について学びます。"
+      },
+      {
+        "title": "ページとルーティング",
+        "slug": "pages-and-routing",
+        "description": "Next.jsのファイルベースルーティングの仕組みを解説します。"
+      }
+    ]
+  },
+  {
+    "theme": "Reactの基本",
+    "themeId": "react-fundamentals",
+    "articles": [
+      {
+        "title": "コンポーネントとは",
+        "slug": "what-is-a-component",
+        "description": "Reactの基本単位であるコンポーネントの概念を理解します。"
+      },
+      {
+        "title": "StateとProps",
+        "slug": "state-and-props",
+        "description": "コンポーネント間でデータをやり取りするためのStateとPropsについて学びます。"
+      }
+    ]
+  }
+]
+
