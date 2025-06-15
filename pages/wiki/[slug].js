@@ -2,16 +2,14 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { getAllPostIds, getPostData } from '../../lib/posts';
 
-// Returns a list of possible values for slug
 export async function getStaticPaths() {
   const paths = getAllPostIds();
   return {
     paths,
-    fallback: false, // Any paths not returned by getStaticPaths will result in a 404 page.
+    fallback: false,
   };
 }
 
-// Fetches necessary data for the post with the given slug
 export async function getStaticProps({ params }) {
   const postData = await getPostData(params.slug);
   return {
@@ -23,19 +21,24 @@ export async function getStaticProps({ params }) {
 
 export default function Post({ postData }) {
   return (
-    <div style={{ fontFamily: 'sans-serif', maxWidth: '800px', margin: '0 auto', padding: '2rem' }}>
+    <div className="container">
       <Head>
         <title>{postData.title}</title>
       </Head>
-      <article>
-        <h1 style={{ fontSize: '2.5rem' }}>{postData.title}</h1>
-        {/* Safely render HTML converted from Markdown */}
-        <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
-      </article>
-      <hr style={{ margin: '2rem 0' }} />
-      <Link href="/">
-        <span style={{ color: '#0070f3', cursor: 'pointer' }}>← Back to home</span>
-      </Link>
+
+      <main>
+        <article className="post-content">
+          <h1>{postData.title}</h1>
+          <div className="post-date">{postData.date}</div>
+          <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+        </article>
+
+        <div className="back-to-home">
+          <Link href="/">
+            <a>← Back to home</a>
+          </Link>
+        </div>
+      </main>
     </div>
   );
 }
