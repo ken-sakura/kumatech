@@ -1,52 +1,38 @@
-import { getArticleData, getAllArticleIds } from '@/lib/articles';
+import { getArticleData } from '@/lib/articles';
 import { notFound } from 'next/navigation';
-import type { Metadata } from 'next';
+import { Sidebar } from '@/app/components/Sidebar';
 
-// ページのPropsの型を定義
-type Props = {
-  params: { id: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-};
+// articles.json を直接インポートします
+import articles from '@/data/articles.json';
 
-// ビルド時に静的なパスを生成するための関数
+// ▼▼▼ この関数をファイルに追記してください ▼▼▼
+// ビルド時に静的なパス（ページ）を生成するための関数
 export async function generateStaticParams() {
-  const articles = await getAllArticles(); // すべての記事データを取得
-  
+  // articles.json の各記事から id を持つオブジェクトの配列を作成します
+  // 例: [ { id: 'getting-started' }, { id: 'routing' }, ... ]
   return articles.map((article) => ({
     id: article.id,
   }));
 }
+// ▲▲▲ ここまでを追記 ▲▲▲
 
-// 記事ページコンポーネント
-// 引数で型を分解せず、propsオブジェクトとして受け取る
-export default async function ArticlePage(props: Props) {
-  const { params } = props; // 関数内で分解する
-  const articleData = await getArticleData(params.id);
+export default async function WikiPage({ params }: { params: { id: string } }) {
+  // 以下のコードは既存のままでOKです
+  const article = await getArticleData(params.id);
 
-  if (!articleData) {
-    notFound();
+  if (!article) {
+    return notFound();
   }
 
   return (
-    <article className="prose dark:prose-invert max-w-none">
-      <h1>{articleData.title}</h1>
-      <div dangerouslySetInnerHTML={{ __html: articleData.contentHtml }} />
-    </article>
+    <div className="flex">
+      <Sidebar />
+      <main className="flex-1 p-8">
+        <article className="prose dark:prose-invert">
+          <h1>{article.title}</h1>
+          <div dangerouslySetInnerHTML={{ __html: article.contentHtml }} />
+        </article>
+      </main>
+    </div>
   );
-}
-
-// メタデータを生成
-// こちらも同様にpropsオブジェクトとして受け取る
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const articleData = await getArticleData(params.id);
-
-    if (!articleData) {
-      return {
-        title: '記事が見つかりません',
-      };
-    }
-
-    return {
-        title: articleData.title,
-    };
 }
