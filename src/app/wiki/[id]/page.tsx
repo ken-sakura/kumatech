@@ -8,7 +8,11 @@ import articles from '@/data/articles.json';
  * ビルド時に静的なHTMLページを生成するためのパス一覧を作成します。
  */
 export async function generateStaticParams() {
-  return articles.map((article) => ({
+  // 全カテゴリから記事のリストを平坦化（フラット化）して取得
+  const allArticles = articles.categories.flatMap(category => category.articles);
+
+  // 全記事のIDをマップして返す
+  return allArticles.map((article) => ({
     id: article.id,
   }));
 }
