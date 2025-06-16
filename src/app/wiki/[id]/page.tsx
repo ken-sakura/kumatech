@@ -1,22 +1,19 @@
 import { getArticleData } from '@/lib/articles';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { Sidebar } from '@/app/components/Sidebar';
-import articles from '@/data/articles.json'; // 記事リストを直接インポート
+// { Sidebar } のように波括弧で囲み、名前付きインポートに修正
+import { Sidebar } from '@/app/components/Sidebar'; 
+import articles from '@/data/articles.json';
 
-// ページのPropsの型を定義
-// このページでは params のみを使用します
-type Props = {
+// ページのPropsの型をNext.jsの標準的な形式に修正
+type PageProps = {
   params: { id: string };
 };
 
 /**
  * ビルド時に静的なHTMLページを生成するためのパス一覧を作成します。
- * 例: /wiki/getting-started, /wiki/routing などのページが生成されます。
  */
 export async function generateStaticParams() {
-  // articles.json の各記事から id を持つオブジェクトの配列を作成
-  // 例: [ { id: 'getting-started' }, { id: 'routing' } ]
   return articles.map((article) => ({
     id: article.id,
   }));
@@ -25,7 +22,7 @@ export async function generateStaticParams() {
 /**
  * ページごとのメタデータ（タイトルなど）を動的に生成します。
  */
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const articleData = await getArticleData(params.id);
 
   if (!articleData) {
@@ -35,17 +32,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   return {
-    title: articleData.title, // ブラウザのタブに表示されるタイトル
+    title: articleData.title,
   };
 }
 
 /**
  * 記事ページ本体のコンポーネントです。
  */
-export default async function ArticlePage({ params }: Props) {
+export default async function ArticlePage({ params }: PageProps) {
   const articleData = await getArticleData(params.id);
 
-  // URLに対応する記事データが見つからない場合、404ページを表示
   if (!articleData) {
     notFound();
   }
