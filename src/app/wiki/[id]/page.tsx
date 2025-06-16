@@ -1,7 +1,7 @@
 import { getArticleData } from '@/lib/articles';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { Sidebar } from '@/app/components/Sidebar';
+import Sidebar from '@/app/components/Sidebar';
 import articles from '@/data/articles.json';
 
 /**
@@ -18,8 +18,8 @@ export async function generateStaticParams() {
  * Propsの型を関数の引数で直接定義します。
  */
 export async function generateMetadata(
-  { params }: { params: { id: string } }
-): Promise<Metadata> {
+  { params }
+): Promise<Metadata>  {
   const articleData = await getArticleData(params.id);
 
   if (!articleData) {
@@ -37,7 +37,7 @@ export async function generateMetadata(
  * 記事ページ本体のコンポーネントです。
  * こちらもPropsの型を直接定義します。
  */
-export default async function ArticlePage({ params }: { params: { id: string } }) {
+export default async function ArticlePage({ params }) {
   const articleData = await getArticleData(params.id);
 
   if (!articleData) {
