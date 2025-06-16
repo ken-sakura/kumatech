@@ -1,17 +1,19 @@
 import { getArticleData } from '@/lib/articles';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import Sidebar from '@/app/components/Sidebar';
+import Sidebar from '@/app/components/Sidebar'; // default importに修正済みのはず
 import articles from '@/data/articles.json';
+
+// Propsの型をここで定義します
+type Props = {
+  params: { id: string };
+};
 
 /**
  * ビルド時に静的なHTMLページを生成するためのパス一覧を作成します。
  */
 export async function generateStaticParams() {
-  // 全カテゴリから記事のリストを平坦化（フラット化）して取得
   const allArticles = articles.categories.flatMap(category => category.articles);
-
-  // 全記事のIDをマップして返す
   return allArticles.map((article) => ({
     id: article.id,
   }));
@@ -19,11 +21,11 @@ export async function generateStaticParams() {
 
 /**
  * ページごとのメタデータ（タイトルなど）を動的に生成します。
- * Propsの型を関数の引数で直接定義します。
+ * 定義したProps型をここで使用します。
  */
 export async function generateMetadata(
-  { params }
-): Promise<Metadata>  {
+  { params }: Props
+): Promise<Metadata> {
   const articleData = await getArticleData(params.id);
 
   if (!articleData) {
@@ -39,9 +41,9 @@ export async function generateMetadata(
 
 /**
  * 記事ページ本体のコンポーネントです。
- * こちらもPropsの型を直接定義します。
+ * こちらも同じProps型を使用します。
  */
-export default async function ArticlePage({ params }) {
+export default async function ArticlePage({ params }: Props) {
   const articleData = await getArticleData(params.id);
 
   if (!articleData) {
