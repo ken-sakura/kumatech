@@ -47,11 +47,14 @@ export default async function ArticlePage({ params }: Props) { // 修正3: Props
     notFound();
   }
 
-return (
-    <main className="flex-1 p-8">
-      <article className="prose dark:prose-invert max-w-none">
-        <h1>{articleData.title}</h1>
-        <div dangerouslySetInnerHTML={{ __html: articleData.contentHtml }} />
-      </article>
-    </main>
+  return (
+    <div className="flex">
+      <Sidebar />  // <- この行を削除
+      <main className="flex-1 p-8">
+        <article className="prose dark:prose-invert max-w-none">
+          <h1>{articleData.title}</h1>
+          <div dangerouslySetInnerHTML={{ __html: articleData.contentHtml }} />
+        </article>
+      </main>
+    </div>
   );
