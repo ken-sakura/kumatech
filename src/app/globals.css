@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* remark-htmlで生成されるHTML要素に
+  TailwindのTypographyプラグインのスタイルを適用します。
+*/
+.prose {
+  @apply dark:prose-invert;
+}
+

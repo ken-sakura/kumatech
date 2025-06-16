@@ -1,0 +1,18 @@
+{
+  "categories": [
+    {
+      "title": "はじめに",
+      "articles": [
+        { "id": "what-is-this", "title": "このWikiについて" }
+      ]
+    },
+    {
+      "title": "Next.js",
+      "articles": [
+        { "id": "getting-started", "title": "Next.jsをはじめよう" },
+        { "id": "routing", "title": "ルーティングの基礎" }
+      ]
+    }
+  ]
+}
+
