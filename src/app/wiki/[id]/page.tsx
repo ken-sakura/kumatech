@@ -49,7 +49,7 @@ export default async function ArticlePage({ params }: Props) { // 修正3: Props
 
   return (
     <div className="flex">
-      <Sidebar />  // <- この行を削除
+      <Sidebar />
       <main className="flex-1 p-8">
         <article className="prose dark:prose-invert max-w-none">
           <h1>{articleData.title}</h1>
@@ -58,3 +58,4 @@ export default async function ArticlePage({ params }: Props) { // 修正3: Props
       </main>
     </div>
   );
+}
