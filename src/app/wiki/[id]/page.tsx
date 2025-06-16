@@ -2,6 +2,12 @@ import { getArticleData, getAllArticleIds } from '@/lib/articles';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 
+// ページのPropsの型を定義
+type Props = {
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
 // 静的パスを生成
 export async function generateStaticParams() {
   const paths = getAllArticleIds();
@@ -9,8 +15,9 @@ export async function generateStaticParams() {
 }
 
 // 記事ページコンポーネント
-// Props型を使わず、引数で直接型を指定
-export default async function ArticlePage({ params }: { params: { id: string } }) {
+// 引数で型を分解せず、propsオブジェクトとして受け取る
+export default async function ArticlePage(props: Props) {
+  const { params } = props; // 関数内で分解する
   const articleData = await getArticleData(params.id);
 
   if (!articleData) {
@@ -26,8 +33,8 @@ export default async function ArticlePage({ params }: { params: { id: string } }
 }
 
 // メタデータを生成
-// Props型を使わず、引数で直接型を指定
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+// こちらも同様にpropsオブジェクトとして受け取る
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const articleData = await getArticleData(params.id);
 
     if (!articleData) {
