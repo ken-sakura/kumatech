@@ -1,14 +1,8 @@
 import { getArticleData } from '@/lib/articles';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-// { Sidebar } のように波括弧で囲み、名前付きインポートに修正
-import { Sidebar } from '@/app/components/Sidebar'; 
+import { Sidebar } from '@/app/components/Sidebar';
 import articles from '@/data/articles.json';
-
-// ページのPropsの型をNext.jsの標準的な形式に修正
-type PageProps = {
-  params: { id: string };
-};
 
 /**
  * ビルド時に静的なHTMLページを生成するためのパス一覧を作成します。
@@ -21,8 +15,11 @@ export async function generateStaticParams() {
 
 /**
  * ページごとのメタデータ（タイトルなど）を動的に生成します。
+ * Propsの型を関数の引数で直接定義します。
  */
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata(
+  { params }: { params: { id: string } }
+): Promise<Metadata> {
   const articleData = await getArticleData(params.id);
 
   if (!articleData) {
@@ -38,8 +35,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 /**
  * 記事ページ本体のコンポーネントです。
+ * こちらもPropsの型を直接定義します。
  */
-export default async function ArticlePage({ params }: PageProps) {
+export default async function ArticlePage({ params }: { params: { id: string } }) {
   const articleData = await getArticleData(params.id);
 
   if (!articleData) {
