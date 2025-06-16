@@ -1,8 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
-  // GitHub Pagesにデプロイするために、静的サイトとして出力する設定を追加
-  output: 'export', 
+  // 静的サイトとして出力する設定
+  output: 'export',
+
+  // GitHub Pagesのリポジトリ名に合わせてパスを設定
+  basePath: '/kumatech', 
+  assetPrefix: '/kumatech/',
+
+  // 静的エクスポート時に画像最適化を無効にする
+  images: {
+    unoptimized: true,
+  },
 };
 
 export default nextConfig;
