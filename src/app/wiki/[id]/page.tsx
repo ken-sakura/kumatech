@@ -49,7 +49,6 @@ export default async function ArticlePage({ params }: Props) { // 修正3: Props
 
   return (
     <div className="flex">
-      <Sidebar />
       <main className="flex-1 p-8">
         <article className="prose dark:prose-invert max-w-none">
           <h1>{articleData.title}</h1>
