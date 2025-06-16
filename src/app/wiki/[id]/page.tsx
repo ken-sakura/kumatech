@@ -3,8 +3,8 @@
 
 import type { Metadata } from "next"; // Metadataはサーバーコンポーネント用なので、クライアントコンポーネントでは使用しない
 import { Inter } from "next/font/google";
-import "@/globals.css";
-import Sidebar from "@/components/Sidebar";
+import Sidebar from '@/app/components/Sidebar'; // 修正1: default import にする
+import articles from '@/data/articles.json';
 import { useState } from 'react'; // useStateをインポート
 
 const inter = Inter({ subsets: ["latin"] });
