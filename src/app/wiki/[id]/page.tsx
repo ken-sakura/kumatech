@@ -3,8 +3,10 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 
 // ページコンポーネントのpropsの型を定義
+// searchParamsを追加して、Next.jsのPagePropsとの互換性を高める
 type Props = {
   params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
 };
 
 // 静的パスを生成
