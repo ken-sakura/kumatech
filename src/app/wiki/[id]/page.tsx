@@ -8,10 +8,13 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
-// 静的パスを生成
+// ビルド時に静的なパスを生成するための関数
 export async function generateStaticParams() {
-  const paths = getAllArticleIds();
-  return paths;
+  const articles = await getAllArticles(); // すべての記事データを取得
+  
+  return articles.map((article) => ({
+    id: article.id,
+  }));
 }
 
 // 記事ページコンポーネント
