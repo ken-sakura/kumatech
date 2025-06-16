@@ -1,8 +1,10 @@
 import { getArticleData, getAllArticleIds } from '@/lib/articles';
 import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
 
-type Params = {
-  id: string;
+// ページコンポーネントのpropsの型を定義
+type Props = {
+  params: { id: string };
 };
 
 // 静的パスを生成
@@ -12,7 +14,7 @@ export async function generateStaticParams() {
 }
 
 // 記事ページコンポーネント
-export default async function ArticlePage({ params }: { params: Params }) {
+export default async function ArticlePage({ params }: Props) {
   const articleData = await getArticleData(params.id);
 
   if (!articleData) {
@@ -28,9 +30,16 @@ export default async function ArticlePage({ params }: { params: Params }) {
 }
 
 // メタデータを生成
-export async function generateMetadata({ params }: { params: Params }) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const articleData = await getArticleData(params.id);
+
+    if (!articleData) {
+      return {
+        title: '記事が見つかりません',
+      };
+    }
+
     return {
-        title: articleData?.title || 'Article',
+        title: articleData.title,
     };
 }
