@@ -2,13 +2,6 @@ import { getArticleData, getAllArticleIds } from '@/lib/articles';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 
-// ページコンポーネントのpropsの型を定義
-// searchParamsを追加して、Next.jsのPagePropsとの互換性を高める
-type Props = {
-  params: { id: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-};
-
 // 静的パスを生成
 export async function generateStaticParams() {
   const paths = getAllArticleIds();
@@ -16,7 +9,8 @@ export async function generateStaticParams() {
 }
 
 // 記事ページコンポーネント
-export default async function ArticlePage({ params }: Props) {
+// Props型を使わず、引数で直接型を指定
+export default async function ArticlePage({ params }: { params: { id: string } }) {
   const articleData = await getArticleData(params.id);
 
   if (!articleData) {
@@ -32,7 +26,8 @@ export default async function ArticlePage({ params }: Props) {
 }
 
 // メタデータを生成
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+// Props型を使わず、引数で直接型を指定
+export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
     const articleData = await getArticleData(params.id);
 
     if (!articleData) {
