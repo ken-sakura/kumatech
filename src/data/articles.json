@@ -9,8 +9,7 @@
     {
       "title": "Next.js",
       "articles": [
-        { "id": "getting-started", "title": "Next.jsをはじめよう" },
-        { "id": "routing", "title": "ルーティングの基礎" }
+        { "id": "getting-started", "title": "Next.jsの初期設定について" }
       ]
     }
   ]
