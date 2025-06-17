@@ -25,6 +25,9 @@ export default function Sidebar({ isOpen, setOpen }: SidebarProps) {
         fixed top-0 left-0 z-20 transform transition-transform duration-300 ease-in-out
         md:translate-x-0
         ${isOpen ? 'translate-x-0' : '-translate-x-full'}
+        
+        // ===== 以下の1行を修正 =====
+        pt-20 md:pt-4
       `}
     >
       <h2 className="text-xl font-bold mb-4 text-white">
@@ -43,7 +46,7 @@ export default function Sidebar({ isOpen, setOpen }: SidebarProps) {
                     <Link
                       href={`/wiki/${article.id}`}
                       onClick={handleLinkClick} // onClickイベントを追加
-                      className="block px-3 py-1 text-gray-400 hover:bg-gray-700 rounded-md"
+                      className="block px-3 py-1 text-gray-400 hover:text-white"
                     >
                       {article.title}
                     </Link>

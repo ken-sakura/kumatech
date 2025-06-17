@@ -55,7 +55,7 @@ export default function RootLayout({
             ></div>
           )}
           {/* メインコンテンツ */}
-          <main className="flex-1 p-8 md:ml-64 w-full">
+          <main className="flex-1 md:pl-64 p-4 pt-20 md:pt-4">
             {children}
           </main>
         </div>
