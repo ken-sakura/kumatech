@@ -1,36 +1,60 @@
-import { getAllArticles, getArticleData } from '@/lib/articles'; // 修正: getArticleData と getAllArticles をインポート
+import { getArticleData } from '@/lib/articles';
 import { notFound } from 'next/navigation';
-import { FC } from 'react';
+import type { Metadata } from 'next';
+import Sidebar from '@/app/components/Sidebar'; // 修正1: default import にする
+import articles from '@/data/articles.json';
 
+// 修正3: Propsの型をここで定義する
 type Props = {
-  params: {
-    id: string;
-  };
+  params: { id: string };
 };
 
-// 修正: getAllArticles を使ってIDのリストを生成
-export const generateStaticParams = async () => {
-  const articles = getAllArticles(); // articles.jsonから全記事情報を取得
-  return articles.map((article) => ({
+/**
+ * ビルド時に静的なHTMLページを生成するためのパス一覧を作成します。
+ */
+export async function generateStaticParams() {
+  // 修正2: カテゴリ内の全記事をflatMapで1つの配列にしてからmapする
+  const allArticles = articles.categories.flatMap(category => category.articles);
+  return allArticles.map((article) => ({
     id: article.id,
   }));
-};
+}
 
-const ArticlePage: FC<Props> = async ({ params }) => {
-  // 修正: getArticleData を呼び出す
-  const article = await getArticleData(params.id);
+/**
+ * ページごとのメタデータ（タイトルなど）を動的に生成します。
+ */
+export async function generateMetadata({ params }: Props): Promise<Metadata> { // 修正3: Props型を適用
+  const articleData = await getArticleData(params.id);
 
-  if (!article) {
+  if (!articleData) {
+    return {
+      title: '記事が見つかりません',
+    };
+  }
+
+  return {
+    title: articleData.title,
+  };
+}
+
+/**
+ * 記事ページ本体のコンポーネントです。
+ */
+export default async function ArticlePage({ params }: Props) { // 修正3: Props型を適用
+  const articleData = await getArticleData(params.id);
+
+  if (!articleData) {
     notFound();
   }
 
   return (
-    // prose-invert でダークモードに対応し、max-w-none で最大幅の制限を解除
-    <article className="prose prose-invert max-w-none">
-      <h1>{article.title}</h1>
-      <div dangerouslySetInnerHTML={{ __html: article.contentHtml }} />
-    </article>
+    <div className="flex">
+      <main className="flex-1 p-8">
+        <article className="prose dark:prose-invert max-w-none">
+          <h1>{articleData.title}</h1>
+          <div dangerouslySetInnerHTML={{ __html: articleData.contentHtml }} />
+        </article>
+      </main>
+    </div>
   );
-};
-
-export default ArticlePage;
+}
