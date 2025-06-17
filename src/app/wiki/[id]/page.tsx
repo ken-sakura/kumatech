@@ -1,61 +1,60 @@
-// app/layout.tsx
-'use client'; // useStateを使うため、'use client' ディレクティブを追加
-
-import type { Metadata } from "next"; // Metadataはサーバーコンポーネント用なので、クライアントコンポーネントでは使用しない
-import { Inter } from "next/font/google";
+import { getArticleData } from '@/lib/articles';
+import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
 import Sidebar from '@/app/components/Sidebar'; // 修正1: default import にする
 import articles from '@/data/articles.json';
-import { useState } from 'react'; // useStateをインポート
 
-const inter = Inter({ subsets: ["latin"] });
+// 修正3: Propsの型をここで定義する
+type Props = {
+  params: { id: string };
+};
 
-// Metadataはサーバーコンポーネントでしかエクスポートできないため、
-// ルートレイアウトをクライアントコンポーネントにする場合は、
-// 別のmetadata.tsファイルに記述するか、ルートlayout.tsxをサーバーコンポーネントのままにして、
-// その中でクライアントコンポーネントのラッパーを使う形にします。
-// ここでは簡易的に削除しますが、本番では適切な方法を選択してください。
-// export const metadata: Metadata = {
-//   title: "My Next.js Wiki",
-//   description: "A static wiki site built with Next.js",
-// };
+/**
+ * ビルド時に静的なHTMLページを生成するためのパス一覧を作成します。
+ */
+export async function generateStaticParams() {
+  // 修正2: カテゴリ内の全記事をflatMapで1つの配列にしてからmapする
+  const allArticles = articles.categories.flatMap(category => category.articles);
+  return allArticles.map((article) => ({
+    id: article.id,
+  }));
+}
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // サイドバーの開閉状態を管理
+/**
+ * ページごとのメタデータ（タイトルなど）を動的に生成します。
+ */
+export async function generateMetadata({ params }: Props): Promise<Metadata> { // 修正3: Props型を適用
+  const articleData = await getArticleData(params.id);
+
+  if (!articleData) {
+    return {
+      title: '記事が見つかりません',
+    };
+  }
+
+  return {
+    title: articleData.title,
+  };
+}
+
+/**
+ * 記事ページ本体のコンポーネントです。
+ */
+export default async function ArticlePage({ params }: Props) { // 修正3: Props型を適用
+  const articleData = await getArticleData(params.id);
+
+  if (!articleData) {
+    notFound();
+  }
 
   return (
-    <html lang="ja" className="dark">
-      <body className={`${inter.className} bg-gray-900 text-gray-300`}>
-        <div className="flex">
-          {/* PC表示では常に表示、SP表示では開閉状態に応じて表示 */}
-          <div className={`fixed inset-y-0 left-0 transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:relative md:translate-x-0 transition-transform duration-200 ease-in-out z-40`}>
-            <Sidebar />
-          </div>
-
-          {/* SP用のハンバーガーボタン */}
-          <button
-            className="md:hidden fixed top-4 left-4 z-50 p-2 text-white bg-gray-700 rounded-md"
-            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          >
-            {isSidebarOpen ? '✕' : '☰'} {/* 開閉アイコン */}
-          </button>
-
-          {/* サイドバーが開いているときにメインコンテンツを覆うオーバーレイ */}
-          {isSidebarOpen && (
-            <div
-              className="fixed inset-0 bg-black opacity-50 z-30 md:hidden"
-              onClick={() => setIsSidebarOpen(false)}
-            ></div>
-          )}
-
-          <main className="flex-1 p-8 bg-gray-900 md:ml-0 ml-16"> {/* SP時はボタン分の余白を確保 */}
-            {children}
-          </main>
-        </div>
-      </body>
-    </html>
+    <div className="flex">
+      <main className="flex-1 p-8">
+        <article className="prose dark:prose-invert max-w-none">
+          <h1>{articleData.title}</h1>
+          <div dangerouslySetInnerHTML={{ __html: articleData.contentHtml }} />
+        </article>
+      </main>
+    </div>
   );
 }
