@@ -50,7 +50,7 @@ export default async function ArticlePage({ params }: Props) { // 修正3: Props
   return (
     <div className="flex">
       <main className="flex-1 p-8">
-        <article className="prose dark:prose-invert max-w-none">
+        <article className="prose dark:prose-invert max-w-prose mx-auto">
           <h1>{articleData.title}</h1>
           <div dangerouslySetInnerHTML={{ __html: articleData.contentHtml }} />
         </article>
