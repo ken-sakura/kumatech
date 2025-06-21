@@ -24,7 +24,7 @@ export default function RootLayout({
         {/* ハンバーガーメニュー (モバイルでのみ表示) */}
         <button
           // md以上の画面サイズで非表示 (md:hidden)
-          className="md:hidden fixed top-4 left-4 z-30 p-2 text-white bg-gray-800 rounded-md"
+          className="fixed top-4 left-4 z-30 p-2 text-white bg-gray-800 rounded-md"
           onClick={() => setSidebarOpen(!isSidebarOpen)}
           aria-label="メニューを開閉"
         >
@@ -50,12 +50,12 @@ export default function RootLayout({
           {/* サイドバー表示時にコンテンツを覆うオーバーレイ */}
           {isSidebarOpen && (
             <div
-              className="md:hidden fixed inset-0 bg-black opacity-50 z-10"
+              className="fixed inset-0 bg-black opacity-50 z-10"
               onClick={() => setSidebarOpen(false)}
             ></div>
           )}
           {/* メインコンテンツ */}
-          <main className="flex-1 md:pl-64 p-4 pt-20 md:pt-4">
+          <main className="flex-1 p-4 pt-20 md:pt-4 pl-20">
             {children}
           </main>
         </div>

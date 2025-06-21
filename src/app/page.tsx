@@ -8,7 +8,7 @@ export default function Home() {
     // テキストカラーをダークモード用に調整
     <div>
       <h1 className="text-4xl font-bold mb-8 text-white">kumatech Wikiへようこそ</h1>
-      <p className="mb-8 text-lg text-gray-400">メニュー・homeへのリンクはサイドバー参照</p>
+      <p className="mb-8 text-lg text-gray-400">メニュー・homeへのリンクはハンガーメニュー参照</p>
       
       <div className="space-y-8">
         {categories.map((category) => (
