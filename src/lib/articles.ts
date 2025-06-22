@@ -1,42 +1,41 @@
+// kumatech/src/lib/articles.ts
+
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { remark } from 'remark';
 import html from 'remark-html';
-import articlesData from '../data/articles.json';
+import articlesData from '../data/articles.json'; // 相対パスのままでOK
 
-const articlesDirectory = path.join(process.cwd(), 'src/articles'); // 'src' ディレクトリを追加
+const articlesRootDirectory = path.join(process.cwd(), 'src', 'articles');
 
-// すべての記事IDのリストを取得
 export function getAllArticleIds() {
-  const allArticles = articlesData.categories.flatMap(category => category.articles);
-  return allArticles.map(article => ({
-    id: article.id,
-  }));
+  const allArticleIds: { id: string }[] = [];
+  articlesData.categories.forEach(category => {
+    category.articles.forEach(article => {
+      allArticleIds.push({ id: article.id });
+    });
+  });
+  return allArticleIds;
 }
 
-// IDに基づいて記事データを取得
 export async function getArticleData(id: string) {
-  const fullPath = path.join(articlesDirectory, `${id}.md`);
-  
-  // ファイルが存在するかチェック
+  // idは "nextjs/getting-started" のような形式で渡されることを想定
+  // idをパスとして直接使用して、fullPathを構築する
+  const fullPath = path.join(articlesRootDirectory, `${id}.md`); // ここで id をそのままパスの一部として使う
+
   if (!fs.existsSync(fullPath)) {
-    console.error(`File not found: ${fullPath}`); // デバッグ用にログを追加
+    console.error(`File not found: ${fullPath}`);
     return null;
   }
   
   const fileContents = fs.readFileSync(fullPath, 'utf8');
-
-  // gray-matterを使ってメタデータを解析
   const matterResult = matter(fileContents);
-
-  // remarkを使ってマークダウンをHTMLに変換
   const processedContent = await remark()
-    .use(html, { sanitize: false }) // sanitizeオプションを追加
+    .use(html, { sanitize: false })
     .process(matterResult.content);
   const contentHtml = processedContent.toString();
   
-  // JSONデータから記事のタイトルを取得
   const articleInfo = articlesData.categories
     .flatMap(c => c.articles)
     .find(a => a.id === id);
@@ -44,8 +43,7 @@ export async function getArticleData(id: string) {
   return {
     id,
     contentHtml,
-    title: articleInfo?.title || 'Untitled', // JSONからタイトルを取得
+    title: articleInfo?.title || 'Untitled',
     ...matterResult.data,
   };
 }
-

@@ -1,3 +1,5 @@
+// kumatech/src/app/components/Sidebar.tsx
+
 import Link from 'next/link';
 import articlesData from '../../data/articles.json';
 
@@ -25,7 +27,6 @@ export default function Sidebar({ isOpen, setOpen }: SidebarProps) {
         fixed top-0 left-0 z-20 transform transition-transform duration-300 ease-in-out
         ${isOpen ? 'translate-x-0' : '-translate-x-full'}
         
-        // ===== 以下の1行を修正 =====
         pt-20
       `}
     >
@@ -40,17 +41,22 @@ export default function Sidebar({ isOpen, setOpen }: SidebarProps) {
             <li key={category.title} className="mb-4">
               <h3 className="font-semibold text-gray-300">{category.title}</h3>
               <ul className="ml-4 mt-2 border-l border-gray-600">
-                {category.articles.map((article) => (
-                  <li key={article.id}>
-                    <Link
-                      href={`/wiki/${article.id}`}
-                      onClick={handleLinkClick} // onClickイベントを追加
-                      className="block px-3 py-1 text-gray-400 hover:text-white"
-                    >
-                      {article.title}
-                    </Link>
-                  </li>
-                ))}
+                {category.articles.map((article) => {
+                  // article.idが "category/slug" 形式であることを想定
+                  const [categoryName, slug] = article.id.split('/');
+                  return (
+                    <li key={article.id}>
+                      {/* ここでhrefのパスを修正するよ！ */}
+                      <Link
+                        href={`/wiki/${categoryName}/${slug}`}
+                        onClick={handleLinkClick} // onClickイベントを追加
+                        className="block px-3 py-1 text-gray-400 hover:text-white"
+                      >
+                        {article.title}
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </li>
           ))}

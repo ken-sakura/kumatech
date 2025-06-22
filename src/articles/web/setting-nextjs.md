@@ -1,9 +1,3 @@
----
-author: 'Tech Writer'
----
-
-# next js初期設定まとめ
-
 ## create-next-app での初期設定
 
 `create-next-app` を実行する際に、いくつかの初期設定を選択できます。

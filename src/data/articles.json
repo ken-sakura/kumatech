@@ -3,15 +3,22 @@
     {
       "title": "はじめに",
       "articles": [
-        { "id": "what-is-this", "title": "このWikiについて" }
+        { "id": "about/about-me", "title": "kumatech Wikiについて" }
+      ]
+    },
+    {
+      "title": "tools",
+      "articles": [
+        { "id": "editor/setting-vim-nvim", "title": "vimとnvimの初期設定メモ" }
       ]
     },
     {
       "title": "Next.js",
       "articles": [
-        { "id": "getting-started", "title": "Next.jsの初期設定について" }
+        { "id": "web/setting-nextjs", "title": "Next.jsの初期設定について" }
       ]
     }
+
   ]
 }
 
