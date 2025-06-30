@@ -15,7 +15,7 @@
     {
       "title": "tools",
       "articles": [
-        { "id": "tools/use-git", "title": "gitの使い方メモ" }
+        { "id": "tools/git-use", "title": "gitの使い方メモ" }
       ]
     },
     {
