@@ -10,12 +10,7 @@
       "title": "tools",
       "articles": [
         { "id": "tools/setting-vim-nvim", "title": "vimとnvimの初期設定メモ" }
-      ]
-    },
-    {
-      "title": "tools",
-      "articles": [
-        { "id": "tools/git-use", "title": "gitの使い方メモ" }
+        ,{ "id": "tools/git-use", "title": "gitの使い方メモ" }
       ]
     },
     {
